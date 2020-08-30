@@ -29,7 +29,7 @@ conda activate covid-viz
 
 ## Usage
 
-Run `plot.py`
+Command line help
 
 ```
 python plot.py -h
@@ -49,6 +49,8 @@ optional arguments:
   --num_miles NUM_MILES
                         A number between 0 and 1000
 ```
+
+Run `plot.py`
 
 ```
 python plot.py --county="Barnstable County, MA" --statistic="confirmed_cases" --num_miles=0
