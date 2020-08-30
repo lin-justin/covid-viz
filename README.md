@@ -15,7 +15,11 @@ The two datasets used are:
 
 Given the two datasets, the main data of interest was the NY Times live COVID-19 cases by US County dataset, however, because the project requires the program to deal with a specified radius of a county, the geo coordinates of such counties are required which the Geocodes dataset provides. 
 
-Through some data exploration, first, there are counties in the NY Times dataset that exist in the Geocodes dataset but in the Geocodes dataset, the same counties are repeated multiple times with slightly different latitude and longitude coordinates. Second, both datasets contained `county` and `state` columns so using `merge` is possible. 
+Through some data exploration:
+
+1. There are counties in the NY Times dataset that exist in the Geocodes dataset but in the Geocodes dataset, the same counties are repeated multiple times with slightly different latitude and longitude coordinates. 
+
+2. Both datasets contained `county` and `state` columns so using `merge` is possible. 
 
 To fix the duplicate counties and states in the Geocodes dataset, I combined the rows of the `county` and `state` columns using a `groupby` [function](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) and took the average of their respective latitude and longitude values to create a unique row containing one county and its respective state.
 
