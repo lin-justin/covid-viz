@@ -1,6 +1,6 @@
 # COVID-19 Visualization
 
-This is my approach and solution to the Singular Genomics Software Project (part of interview process).
+This is my approach and solution to the [Singular Genomics](https://singulargenomics.com/) Software Project for the Software Engineer position.
 
 ## Description
 
