@@ -38,6 +38,8 @@ To deal with this, I implemented a `if-else` conditional to specially plot these
 
 ## Installation
 
+Most importantly, please have [Miniconda](https://docs.conda.io/en/latest/miniconda.html) installed.
+
 Clone the repository
 
 ```
