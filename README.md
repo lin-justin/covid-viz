@@ -9,7 +9,7 @@ The intention is to build a visualization tool for COVID-19 data across differen
 The two datasets used are:
 
 - [live COVID-19 cases by US County](https://github.com/nytimes/covid-19-data/blob/master/live/us-counties.csv)
-- [US Counties with geo coordinates[(https://data.healthcare.gov/dataset/Geocodes-USA-with-Counties/52wv-g36k)
+- [US Counties with geo coordinates](https://data.healthcare.gov/dataset/Geocodes-USA-with-Counties/52wv-g36k)
 
 ## Installation
 
