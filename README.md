@@ -55,3 +55,5 @@ Run `plot.py`
 ```
 python plot.py --county="Barnstable County, MA" --statistic="confirmed_cases" --num_miles=0
 ```
+
+After the script has ran, a new window will open in your web browser showing the resulting visualization.
