@@ -70,9 +70,9 @@ optional arguments:
                         so: 'Barnstable County, MA'
   --statistic STATISTIC
                         The COVID-19 statistic of interest. Options are:
-                        'cases', 'deaths', 'confirmed cases',
+                        'cases', 'deaths', 'confirmed_cases',
                         'confirmed_cases', 'confirmed_deaths',
-                        'probable_cases','probable_deaths'
+                        'probable_cases', 'probable_deaths'
   --num_miles NUM_MILES
                         A number between 0 and 1000
 ```
