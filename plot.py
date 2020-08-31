@@ -51,6 +51,15 @@ def plot(df, county = "Barnstable County, MA", statistic = "cases", num_miles = 
     split_county = county.split(" County, ")
     county = split_county[0]
     state = split_county[1]
+    
+    # Check if user inputted county and state exists in the dataframe
+    for counties in df["county"]:
+        if county != counties:
+            raise Exception("The inputted county does not have any COVID-19 related information. Please try another county.")
+
+    for states in df["state"]:
+        if state != states:
+            raise Exception("The inputted state does not exist. Please input a valid state.")
 
     # Check to make sure num_miles is within the range of 0 and 1000
     if num_miles < 0 or num_miles > 1000:
