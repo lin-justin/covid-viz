@@ -65,6 +65,18 @@ def load_state_abbrevs():
     
     return state_abbrevs
 
+def check_county(df, county):
+    for counties in df["county"]:
+        if county in counties:
+            return county
+    raise Exception("The inputted county does not have any COVID-19 related information. Please try another county.")
+
+def check_state(df, state):
+    for states in df["state"]:
+        if state in states:
+            return state
+    raise Exception("The inputted state does not exist. Please input a valid state.")
+
 def calculate_surrounding_coords(sample, num_miles):
     """The project asks to address the question "How many [statistic] COVID-19 occurred
     within [num_miles] from [US County]?"
