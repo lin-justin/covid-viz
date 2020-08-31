@@ -88,3 +88,7 @@ After the script finishes, a new window or tab will open in your web browser sho
 ## Example Output
 
 ![picture alt](https://github.com/lin-justin/covid-viz/blob/master/results/bristol_county_ma_10_miles.png)
+
+![picture alt](https://github.com/lin-justin/covid-viz/blob/master/results/middlesex_county_ma_9_miles.png)
+
+![picture alt](https://github.com/lin-justin/covid-viz/blob/master/results/bristol_county_ma_100_miles.png)
