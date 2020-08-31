@@ -38,7 +38,7 @@ To deal with this, I implemented a logic function to specially plot these counti
 
 ## Installation
 
-Most importantly, please have [Miniconda](https://docs.conda.io/en/latest/miniconda.html) installed.
+Most importantly, please have [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) and [Git](https://git-scm.com/downloads) installed.
 
 Clone the repository
 
