@@ -84,3 +84,7 @@ python plot.py --county="Barnstable County, MA" --statistic="confirmed_cases" --
 ```
 
 After the script finishes, a new window or tab will open in your web browser showing the resulting visualization.
+
+## Example Output
+
+![picture alt](https://github.com/lin-justin/covid-viz/blob/master/results/bristol_county_ma_10_miles.png)
