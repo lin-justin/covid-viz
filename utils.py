@@ -65,18 +65,6 @@ def load_state_abbrevs():
     
     return state_abbrevs
 
-def check_county(df, county):
-    for counties in df["county"]:
-        if county in counties:
-            return county
-    raise Exception("The inputted county does not have any COVID-19 related information. Please try another county.")
-
-def check_state(df, state):
-    for states in df["state"]:
-        if state in states:
-            return state
-    raise Exception("The inputted state does not exist. Please input a valid state.")
-
 def calculate_surrounding_coords(sample, num_miles):
     """The project asks to address the question "How many [statistic] COVID-19 occurred
     within [num_miles] from [US County]?"
@@ -105,13 +93,51 @@ def calculate_surrounding_coords(sample, num_miles):
     dest_south = d.destination(start, distance = miles_to_km, bearing = 180)
     dest_west = d.destination(start, distance = miles_to_km, bearing = 270)
     
-    lat = [dest_north.latitude, dest_east.latitude, sample["latitude"].values[0], 
-           dest_south.latitude, dest_west.latitude]
+    lat = [dest_north.latitude, dest_east.latitude, dest_south.latitude, dest_west.latitude]
     
-    lon = [dest_north.longitude, dest_east.longitude, sample["longitude"].values[0],
-           dest_south.longitude, dest_west.longitude]
+    lon = [dest_north.longitude, dest_east.longitude, dest_south.longitude, dest_west.longitude]
     
     return lat, lon
+
+def check_county(df, county):
+    """Check to make sure user-specified county is in the dataframe
+
+    Args:
+    =====
+        df (pd.DataFrame): A pandas DataFrame from load_data()
+        county (str): User-specified county of interest
+
+    Raises:
+    =======
+        Exception: Error message will show if user-specified county is not in dataframe
+
+    Returns:
+        county (str): User-specified county that is in the dataframe
+    """
+    for counties in df["county"]:
+        if county in counties:
+            return county
+    raise Exception("The inputted county does not have any COVID-19 related information. Please try another county.")
+
+def check_state(df, state):
+    """Check to make sure user-specified state is in the dataframe
+
+    Args:
+    =====
+        df (pd.DataFrame): A pandas DataFrame from load_data()
+        state (str): User-specified state of interest
+
+    Raises:
+    =======
+        Exception: Error message will show if user-specified state is not in dataframe
+
+    Returns:
+        state (str): User-specified state that is in the dataframe
+    """
+    for states in df["state"]:
+        if state in states:
+            return state
+    raise Exception("The inputted state does not exist. Please input a valid state.")
 
 def load_args():
     """Utility function to load the command line arguments
