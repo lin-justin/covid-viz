@@ -17,7 +17,7 @@ Given the two datasets, the main data of interest was the NY Times live COVID-19
 
 Through some data exploration:
 
-1. There are counties in the NY Times dataset that exist in the Geocodes dataset but in the Geocodes dataset, the same counties are repeated multiple times with slightly different latitude and longitude coordinates. 
+1. There are counties in the NY Times dataset that exist in the Geocodes dataset, but in the Geocodes dataset, the same counties are repeated multiple times with slightly different latitude and longitude coordinates. 
 
 2. Both datasets contained `county` and `state` columns so using `merge` is possible. 
 
@@ -34,7 +34,7 @@ In addition, there are counties with the same name but in different states, for 
 - Bristol County, MA
 - Bristol County, RI
 
-To deal with this, I implemented a `if-else` conditional to specially plot these counties since there are only 4 of these special cases.
+To deal with this, I implemented a logic function to specially plot these counties since there are only 4 of these special cases.
 
 ## Installation
 
