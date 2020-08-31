@@ -121,9 +121,9 @@ def load_args():
                         required = True, 
                         help = """
                         The COVID-19 statistic of interest.
-                        Options are: 'cases', 'deaths', 'confirmed cases',
+                        Options are: 'cases', 'deaths', 'confirmed_cases',
                                      'confirmed_cases', 'confirmed_deaths', 
-                                     'probable_cases','probable_deaths'
+                                     'probable_cases', 'probable_deaths'
                         """)
 
     parser.add_argument("--num_miles",
