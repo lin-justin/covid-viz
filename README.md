@@ -15,39 +15,43 @@ The two datasets used are:
 
 Given the two datasets, the main data of interest was the NY Times live COVID-19 cases by US County dataset, however, because the project requires the program to deal with a specified radius of a county, the geo coordinates of such counties are required which the Geocodes dataset provides. 
 
-Through some data exploration:
+From my data exploration:
 
 1. There are counties in the NY Times dataset that exist in the Geocodes dataset, but in the Geocodes dataset, the same counties are repeated multiple times with slightly different latitude and longitude coordinates. 
 
-2. Both datasets contained `county` and `state` columns so using `merge` is possible. 
+2. Both datasets contain `county` and `state` columns so using a `merge` function is possible. 
 
-To fix the duplicate counties and states in the Geocodes dataset, I combined the rows of the `county` and `state` columns using a `groupby` [function](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) and took the average of their respective latitude and longitude values to create a unique row containing one county and its respective state.
+To fix the duplicate counties and states in the Geocodes dataset, I combined the rows of the `county` and `state` columns using a `groupby` [function](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.groupby.html) and took the average of their respective latitude and longitude values to create unique rows that contain only one county and its respective state to match with the NY Times dataset.
 
-From there, I used a `merge` [function](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.merge.html) to join the two datasets on the `county` and `state` columns. In other words, I created a dataset that contains the counties and states from the NY Times dataset with their respective latitude and longitude values from the Geocodes dataset.
+From there, I used a `merge` [function](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.merge.html) to join the two datasets on their `county` and `state` columns. In other words, I created a dataset that contains all the COVID-19 related data from the NY Times dataset with the addition of the counties latitude and longitude values from the Geocodes dataset.
 
 Finally, with a dataset with all the relevant information, I used [Plotly](https://plotly.com/python/county-choropleth/) to visualize COVID-19 data across different counties.
 
-In addition, there are counties with the same name but in different states, for example: 
+There were special cases where counties have the same name but are located in different states, for example: 
 
 - Suffolk County, MA
 - Suffolk County, NY
 - Bristol County, MA
 - Bristol County, RI
 
-To deal with this, I implemented a logic function to specially plot these counties since there are only 4 of these special cases.
+In addition, if the user specifies a large number for the `num_miles` parameter, for example 500, the visualization will need to display COVID-19 data in other counties in other states, if the merged dataset contains the latitude and longitude values for them. To account for this, it is necessary to calculate the surrounding coordinates (North, South, East, West) from the origin coordinates (i.e. the coordinates of the county specified by the user) based on the number of miles specified by the user. Using the surrounding coordinates, filter the merged datasets to only get the counties with latitude and longitude values that satisfy the range of the surrounding coordinates. 
+
+For example, if the origin coordinates are (42.5 lat, -71.3 long) and `num_miles` is 100, coordinates to the west are (42.5 lat, -73.3 long), east is (42.5 lat, -69.3 long), north is (43.9 lat, -71.3 long), and south is (40.9 lat, -71.3 long). We want to find coordinates of counties that are within these four surrounding coordinates and plot them.
 
 ## Installation
 
-Most importantly, please have [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) and [Git](https://git-scm.com/downloads) installed.
+Most importantly, please have [Anaconda](https://docs.anaconda.com/anaconda/install/) (or [Miniconda](https://docs.conda.io/en/latest/miniconda.html)) and [Git](https://git-scm.com/downloads) installed.
 
-Clone the repository
+Once they are installed, follow the steps below:
+
+1. Clone the repository
 
 ```
 git clone https://github.com/lin-justin/covid-viz.git
 cd covid-viz
 ```
 
-Create Conda environment
+2. Create and activate the Conda environment
 
 ```
 conda env create -f environment.yml
