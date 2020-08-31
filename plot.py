@@ -52,9 +52,11 @@ def plot(df, county = "Barnstable County, MA", statistic = "cases", num_miles = 
     county = split_county[0]
     state = split_county[1]
     
+    state_abbrevs = load_state_abbrevs()
+    
     # Check if user inputted county and state exists in the dataframe
     county = check_county(df, county)
-
+    
     state = state_abbrevs[state]
     
     state = check_state(df, state)
