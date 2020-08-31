@@ -34,7 +34,9 @@ There were special cases where counties have the same name but are located in di
 - Bristol County, MA
 - Bristol County, RI
 
-In addition, if the user specifies a large number for the `num_miles` parameter, for example 500, the visualization will need to display COVID-19 data in other counties in other states, if the merged dataset contains the latitude and longitude values for them. To account for this, it is necessary to calculate the surrounding coordinates (North, South, East, West) from the origin coordinates (i.e. the coordinates of the county specified by the user) based on the number of miles specified by the user. Using the surrounding coordinates, filter the merged datasets to only get the counties with latitude and longitude values that satisfy the range of the surrounding coordinates. 
+In addition, if the user specifies a large number for the `num_miles` parameter, for example 500, the visualization will need to display COVID-19 data in other counties in other states, if the merged dataset contains the latitude and longitude values for them. 
+
+To account for this, it is necessary to calculate the surrounding coordinates (North, South, East, West) from the origin coordinates (i.e. the coordinates of the county specified by the user) based on the number of miles specified by the user. I used [geopy](https://geopy.readthedocs.io/en/stable/#module-geopy.distance) to calculate such distance. Then, using the surrounding coordinates, filter the merged datasets to only get the counties with latitude and longitude values that satisfy the range of these surrounding coordinates. 
 
 For example, if the origin coordinates are (42.5 lat, -71.3 long) and `num_miles` is 100, coordinates to the west are (42.5 lat, -73.3 long), east is (42.5 lat, -69.3 long), north is (43.9 lat, -71.3 long), and south is (40.9 lat, -71.3 long). We want to find coordinates of counties that are within these four surrounding coordinates and plot them.
 
