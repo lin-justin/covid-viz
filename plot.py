@@ -8,7 +8,7 @@ import plotly.figure_factory as ff
 import plotly.graph_objects as go
 
 from data import load_data
-from utils import load_state_abbrevs, load_args, calculate_surrounding_coords
+from utils import load_state_abbrevs, load_args, calculate_surrounding_coords, check_county, check_state
 
 def plot(df, county = "Barnstable County, MA", statistic = "cases", num_miles = 0):
     """Plot the user-specified county visualizing the user-specified statistic
@@ -53,13 +53,11 @@ def plot(df, county = "Barnstable County, MA", statistic = "cases", num_miles = 
     state = split_county[1]
     
     # Check if user inputted county and state exists in the dataframe
-    for counties in df["county"]:
-        if county != counties:
-            raise Exception("The inputted county does not have any COVID-19 related information. Please try another county.")
+    county = check_county(df, county)
 
-    for states in df["state"]:
-        if state != states:
-            raise Exception("The inputted state does not exist. Please input a valid state.")
+    state = state_abbrevs[state]
+    
+    state = check_state(df, state)
 
     # Check to make sure num_miles is within the range of 0 and 1000
     if num_miles < 0 or num_miles > 1000:
@@ -68,14 +66,11 @@ def plot(df, county = "Barnstable County, MA", statistic = "cases", num_miles = 
     # If the user specifies no miles, then plot the entire county
     # with the specified statistic
     if num_miles == 0:
-        if (county == "Suffolk" and state == "MA") \
-            or (county == "Bristol" and state == "MA") \
-            or (county == "Suffolk" and state == "NY") \
-            or (county == "Bristol" and state == "RI"):
+        if (county == "Suffolk" and state == "Massachusetts") \
+            or (county == "Bristol" and state == "Massachusetts") \
+            or (county == "Suffolk" and state == "New York") \
+            or (county == "Bristol" and state == "Rhode Island"):
 
-            state_abbrevs = load_state_abbrevs()
-            state = state_abbrevs[state]
-            
             scope = [county, state]
 
             sample = df[(df["county"].isin(scope)) & (df["state"].isin(scope))]
@@ -92,7 +87,7 @@ def plot(df, county = "Barnstable County, MA", statistic = "cases", num_miles = 
             fig = ff.create_choropleth(
                 fips = fips, 
                 values = values, 
-                scope = ["Massachusetts"],
+                scope = scope,
                 binning_endpoints = endpts,
                 colorscale = colorscale, 
                 show_state_data = True,
@@ -147,14 +142,11 @@ def plot(df, county = "Barnstable County, MA", statistic = "cases", num_miles = 
     
     # Else plot the area based on the number of miles specified
     else:
-        if (county == "Suffolk" and state == "MA") \
-            or (county == "Bristol" and state == "MA") \
-            or (county == "Suffolk" and state == "NY") \
-            or (county == "Bristol" and state == "RI"):
+        if (county == "Suffolk" and state == "Massachusetts") \
+            or (county == "Bristol" and state == "Massachusetts") \
+            or (county == "Suffolk" and state == "New York") \
+            or (county == "Bristol" and state == "Rhode Island"):
 
-            state_abbrevs = load_state_abbrevs()
-            state = state_abbrevs[state]
-            
             scope = [county, state]
 
             sample = df[(df["county"].isin(scope)) & (df["state"].isin(scope))]
@@ -171,7 +163,7 @@ def plot(df, county = "Barnstable County, MA", statistic = "cases", num_miles = 
             fig = ff.create_choropleth(
                 fips = fips, 
                 values = values, 
-                scope = ["Massachusetts"],
+                scope = scope,
                 binning_endpoints = endpts,
                 colorscale = colorscale, 
                 show_state_data = True,
@@ -182,7 +174,7 @@ def plot(df, county = "Barnstable County, MA", statistic = "cases", num_miles = 
                 simplify_state = 0, 
                 state_outline = {'width': 1},
                 legend_title = '# of {}'.format(statistic),
-                title = '{} County, {} (within {} miles) COVID-19 {}'.format(county, state, num_miles, statistic)
+                title = '{} County, {}  <br> (within {} miles) COVID-19 {}'.format(county, state, num_miles, statistic)
             )
 
             lat, lon = calculate_surrounding_coords(sample, num_miles)
@@ -222,7 +214,7 @@ def plot(df, county = "Barnstable County, MA", statistic = "cases", num_miles = 
                 simplify_state = 0, 
                 state_outline = {'width': 1},
                 legend_title = '# of {}'.format(statistic),
-                title = '{} County, {} (within {} miles) COVID-19 {}'.format(county, state, num_miles, statistic)
+                title = '{} County, {} <br> (within {} miles) COVID-19 {}'.format(county, state, num_miles, statistic)
             )
 
             lat, lon = calculate_surrounding_coords(sample, num_miles)
